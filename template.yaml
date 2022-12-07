@@ -1,15 +1,14 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: aws-workload-snowflake-sql-template.1
-  title: Snowflake SQL Workload
-  description: Defines the SQL file that will transform the data inside a Snowflake environment handled by MWAA
+  name: aws-workload-dbt-transformation-template.1
+  title: DBT Transformation Workload
+  description: Defines the a DBT project skeleton to perform data transformation
   mesh:
-    icon: https://images.peerspot.com/image/upload/c_scale,f_auto,q_auto,w_200/n6s4iaqxu28b48836wzu0qr31g18.png
+    icon: https://seeklogo.com/images/D/dbt-logo-500AB0BAA7-seeklogo.com.png
   tags:
-    - aws
+    - dbt
     - sql
-    - snowflake
     - workload
 spec:
   owner: agilelab
@@ -28,7 +27,7 @@ spec:
           type: string
           description: Required name used for display purposes
           ui:field: EntityNamePicker
-          default: Snowflake SQL Workload
+          default: DBT Transformation Workload
           ui:options:
             allowArbitraryValues: true
         fullyQualifiedName:
@@ -88,15 +87,13 @@ spec:
               allowArbitraryValues: false
           description: A Workload could depend on other components
 
-    - title: SQL file details
-      required:
-        - sqlName
+    - title: DBT Project
       properties:
-        sqlName:
-          title: Snowflake SQL file name
+        dbtName:
+          title: Project name
           type: string
-          description: Name of the .sql file located in the artifacts/ folder of the component
-          default: snowflake.sql
+          description: Add a custom name to your dbt project
+          default: dmb_dbt_transform
 
     - title: Choose a location
       required:
@@ -132,9 +129,9 @@ spec:
           developmentGroup: '${{ parameters.developmentGroup }}'
           dependsOn: '${{ parameters.dependsOn }}'
           readsFrom: '${{ parameters.readsFrom }}'
-          sqlName: '${{ parameters.sqlName }}'
-          useCaseTemplateId: urn:dmb:utm:aws-workload-snowflake-sql-template:0.0.0
-          infrastructureTemplateId: urn:dmb:itm:aws-workload-snowflake-sql-provisioner:0
+          dbtProjectName: '${{ parameters.dbtName }}'
+          useCaseTemplateId: urn:dmb:utm:aws-workload-dbt-transformation-template:0.0.0
+          infrastructureTemplateId: urn:dmb:itm:aws-workload-dbt-transformation-provisioner:0
           useCaseTemplateVersion: 0.0.0
           destination: '${{ parameters.repoUrl | parseRepoUrl }}'
           displayName: '${{ parameters.displayName }}'

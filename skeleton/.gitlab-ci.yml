@@ -1,9 +1,0 @@
-deploy:
-  stage: deploy
-  image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
-  script:
-  - aws configure set aws_access_key_id ${AWS_ACCESS_KEY} --profile default
-  - aws configure set aws_secret_access_key ${AWS_SECRET_KEY} --profile default
-  - aws configure set region eu-central-1 --profile default
-  - aws s3 cp ./artifacts/${{ values.sqlName }} s3://aws-ia-mwaa-eu-central-1-278435202378/dags/${{ values.identifier.split(".").slice(0, 3).join(".") }}.${{ values.sqlName }}
-  environment: production

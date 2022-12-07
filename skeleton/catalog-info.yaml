@@ -32,4 +32,6 @@ spec:
     workloadType: batch
     connectionType: DataPipeline
     tags: []
-    specific: {}
+    specific:
+      dbtProjectName: ${{ values.dbtProjectName }}
+      gitUrl: "${{ "https://" + values.destination.host + "/" + values.destination.owner + "/" + values.destination.repo + ".git" }}"
