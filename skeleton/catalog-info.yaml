@@ -32,6 +32,8 @@ spec:
     workloadType: batch
     connectionType: DataPipeline
     tags: []
+    readsFrom: {% if values.readsFrom | length > 0 %}{% for i in values.readsFrom %}
+      - ${{ i }}{% endfor %}{% else %}[]{% endif %}
     specific:
       dbtProjectName: ${{ values.dbtProjectName }}
       gitUrl: "${{ "https://" + values.destination.host + "/" + values.destination.owner + "/" + values.destination.repo + ".git" }}"
