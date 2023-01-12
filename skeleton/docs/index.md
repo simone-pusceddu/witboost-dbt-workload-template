@@ -1,6 +1,8 @@
-# DBT Transformation workload template
+${{ values.name }}
 
 Use this template to automatically create an empty dbt project that can be referenced from other components inside the platform.
+
+${{ values.description }}
 
 ## Using the template
 
