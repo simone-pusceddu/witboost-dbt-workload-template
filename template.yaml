@@ -103,30 +103,13 @@ spec:
           description: Add a custom name to your dbt project
           default: dmb_dbt_transform
 
-    - title: Choose a location
-      required:
-        - repoUrl
-      properties:
-        repoUrl:
-          title: Repository Location
-          type: string
-          ui:field: RepoUrlPicker
-          ui:options:
-            allowedHosts:
-              - gitlab.com
-        rootDirectory:
-          title: Root Directory
-          type: string
-          description: Path that will be used as the repository root for this component
-          default: .
-
   steps:
     - id: template
       name: Fetch Skeleton + Template
       action: fetch:template
       input:
         url: ./skeleton
-        targetPath: '${{ parameters.rootDirectory }}'
+        targetPath: '.'
         values:
           name: '${{ parameters.name }}'
           fullyQualifiedName: '${{ parameters.fullyQualifiedName }}'
@@ -141,7 +124,8 @@ spec:
           useCaseTemplateId: urn:dmb:utm:aws-workload-dbt-transformation-template:0.0.0
           infrastructureTemplateId: urn:dmb:itm:aws-workload-dbt-transformation-provisioner:0
           useCaseTemplateVersion: 0.0.0
-          destination: '${{ parameters.repoUrl | parseRepoUrl }}'
+          repoUrl: 'gitlab.com?owner=AgileDMBSandbox%2F${{orgname}}%2Fmesh.repository%2F${{ parameters.domain | replace(r/domain:| |-/, "") }}%2F${{ parameters.dataproduct.split(".")[1] | replace(r/ |-/g, "") }}&repo=${{ parameters.name.split(" ") | join("") | lower }}'
+          rootDirectory: '.'
           displayName: '${{ parameters.displayName }}'
 
 
@@ -151,8 +135,8 @@ spec:
       input:
         allowedHosts: ['gitlab.com']
         description: 'This is ${{ parameters.name }}'
-        repoUrl: '${{ parameters.repoUrl }}'
-        rootDirectory: '${{ parameters.rootDirectory }}'
+        repoUrl: 'gitlab.com?owner=AgileDMBSandbox%2F${{orgname}}%2Fmesh.repository%2F${{ parameters.domain | replace(r/domain:| |-/, "") }}%2F${{ parameters.dataproduct.split(".")[1] | replace(r/ |-/g, "") }}&repo=${{ parameters.name.split(" ") | join("") | lower }}'
+        rootDirectory: '.'
         dataproduct: '${{ parameters.dataproduct }}'
 
     - id: register
@@ -160,7 +144,7 @@ spec:
       action: catalog:register
       input:
         repoContentsUrl: '${{ steps.publish.output.repoContentsUrl }}'
-        catalogInfoPath: '/${{ parameters.rootDirectory }}/catalog-info.yaml'
+        catalogInfoPath: '/catalog-info.yaml'
 
   output:
     links:
