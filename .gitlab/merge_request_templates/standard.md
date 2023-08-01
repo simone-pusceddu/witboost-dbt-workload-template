@@ -24,7 +24,7 @@ Closes #{{issue.iid}}
 - [ ] Feature was implemented as per the requirements
 - [ ] If some code parts are complex they must be commented with code documentation
 - [ ] If feature affects the corresponding Governance Policy, then the policy has been updated and a new version of the policy set up (before the template is QA tested)
-- [ ] QA tests are successful
+- [ ] QA tests are successful (please comment with a link to the created component & tested DP)
     - Template must be tested by:
         - Creating a component with it in QA env
         - Committing the DP
