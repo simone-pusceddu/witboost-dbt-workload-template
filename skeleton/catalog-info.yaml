@@ -36,4 +36,5 @@ spec:
       - ${{ i }}{% endfor %}{% else %}[]{% endif %}
     specific:
       dbtProjectName: ${{ values.dbtProjectName }}
-      gitUrl: "https://AgileDMBSandbox/${{orgname}}/mesh.repository/ + ${{ parameters.domain | replace(r/domain:| |-/, "") }} + "/" + ${{ parameters.dataproduct.split(".")[1] | replace(r/ |-/g, "") }} + "/" + ${{ parameters.name.split(" ") | join("") | lower }} + .git"
+      gitUrl: |
+        https://gitlab.com/AgileDMBSandbox/${{orgname}}/mesh.repository/${{ values.domain | replace(r/domain:| |-/, "") }}/${{ values.dataproduct.split(".")[1] | replace(r/ |-/g, "") }}/${{ values.name.split(" ") | join("") | lower }}.git
