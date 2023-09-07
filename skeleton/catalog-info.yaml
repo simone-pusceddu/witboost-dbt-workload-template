@@ -28,7 +28,7 @@ spec:
     dependsOn: {% if values.dependsOn | length > 0 %}{% for i in values.dependsOn %}
       - ${{ i }}{% endfor %}{% else %}[]{% endif %}
     platform: AWS
-    technology: airflow
+    technology: dbt
     workloadType: batch
     connectionType: DataPipeline
     tags: []

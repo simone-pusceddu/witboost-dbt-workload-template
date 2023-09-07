@@ -1,0 +1,8 @@
+site_name: "DBT Workload Template"
+site_description: "Template to create a dbt project"
+
+nav:
+  - Template Usage: index.md
+
+plugins:
+  - techdocs-core
