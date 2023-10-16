@@ -1,0 +1,15 @@
+image: python:3.11-slim
+
+stages:
+  - publish
+
+publish:
+  stage: publish
+  before_script:
+    - apt-get update -qy
+    - apt-get install -y git
+    - ls -la
+  script:
+    - pip install setuptools build twine
+    - python -m build --wheel
+    - TWINE_PASSWORD=${CI_JOB_TOKEN} TWINE_USERNAME=gitlab-ci-token python -m twine upload --verbose --repository-url ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/pypi dist/*.whl

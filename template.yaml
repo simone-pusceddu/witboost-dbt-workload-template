@@ -15,7 +15,7 @@ spec:
   type: workload
 
   parameters:
-    - title: Component basic information
+    - title: Component Basic Information
       required:
         - name
         - domain
@@ -110,6 +110,8 @@ spec:
       input:
         url: ./skeleton
         targetPath: '.'
+        copyWithoutTemplating:
+          - .gitlab-ci.yml
         values:
           name: '${{ parameters.name }}'
           fullyQualifiedName: '${{ parameters.fullyQualifiedName }}'

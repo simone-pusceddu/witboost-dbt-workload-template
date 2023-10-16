@@ -52,6 +52,16 @@ To verify the component before deploying it along with the Data Product, the com
 For more information, please refer to the [official documentation](https://docs.witboost.agilelab.it/docs/p1_user/p5_managing_policies/p5_1_overview).
 
 
+## Artifacts
+
+This project uses Python `setuptools` and `build` for packaging. Build artifacts with:
+
+```python
+python -m build --wheel
+```
+
+If you wish to change the default version, you can do so by going inside the `version.py` file and change it to suit your needs.
+
 ## License
 
 This project is available under the [Apache License, Version 2.0](https://opensource.org/licenses/Apache-2.0); see [LICENSE](LICENSE) for full details.
