@@ -4,6 +4,21 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "dbt_workload"
+requires-python = ">=3.7"
+license = {text = "MIT"}
+description = "This package is used as an input to the Specific Provisioner"
+authors = [
+    {name = "Agile Lab", email = "sahith.yerram@agilelab.it"},
+]
+maintainers = [
+    {name = "Agile Lab S.r.l"}
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+    "Topic :: Software Development :: Build Tools",
+    "License :: OSI Approved :: MIT License"
+]
 dynamic = ["version"]
 
 [tool.setuptools_scm]

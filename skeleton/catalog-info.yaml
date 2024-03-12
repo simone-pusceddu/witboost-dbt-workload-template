@@ -4,7 +4,7 @@ metadata:
   name: ${{ values.identifier }}
   description: ${{ values.description | dump }}
   annotations:
-    gitlab.com/project-slug: 'AgileDMBSandbox/${{orgname}}/mesh.repository/${{ values.domain | replace(r/domain:| |-/, "") }}/${{ values.dataproduct.split(".")[1] | replace(r/ |-/g, "") }}/${{ values.name.split(" ") | join("") | lower }}'
+    gitlab.com/project-slug: 'AgileFactory/Witboost.Mesh/iac/qa/mesh.repository/${{ values.domain | replace(r/domain:| |-/, "") }}/${{ values.dataproduct.split(".")[1] | replace(r/ |-/g, "") }}/${{ values.name.split(" ") | join("") | lower }}'
     backstage.io/techdocs-ref: dir:.
   tags:
     - sql
@@ -36,4 +36,8 @@ spec:
     specific:
       dbtProjectName: ${{ values.dbtProjectName }}
       gitUrl: |
-        https://gitlab.com%2FAgileDMBSandbox%2F${{orgname}}%2Fmesh.repository%2F${{ values.domain | replace(r/domain:| |-/, "") }}%2F${{ values.dataproduct.split(".")[1] | replace(r/ |-/g, "") }}%2F${{ values.name.split(" ") | join("") | lower }}.git
+        https://gitlab.com/AgileFactory/Witboost.Mesh/iac/qa/mesh.repository/${{ values.domain | replace(r/domain:| |-/, "") }}/${{ values.dataproduct.split(".")[1] | replace(r/ |-/g, "") }}/${{ values.name.split(" ") | join("") | lower }}.git
+      cloudStorage:
+        {% for key, value in values.cloudStorage %}
+          ${{ key }}: ${{ value }}
+        {% endfor %}

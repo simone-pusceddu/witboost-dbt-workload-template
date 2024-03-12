@@ -1,8 +1,8 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: aws-workload-dbt-transformation-template.1
-  title: DBT Transformation Workload
+  name: aws-workload-dbt-transformation-767-template.1
+  title: DBT Transformation Updated Workload
   description: Defines the a DBT project skeleton to perform data transformation
   mesh:
     icon: https://seeklogo.com/images/D/dbt-logo-500AB0BAA7-seeklogo.com.png
@@ -62,7 +62,7 @@ spec:
         identifier:
           title: Identifier
           type: string
-          description: A unique identifier for the entity inside the domain. It will not be editable aftrer creation and is expected to be a string that is sequences of [a-zA-Z] separated by any of [-_]. An example could be 'finance-customer'
+          description: A unique identifier for the entity inside the domain. It will not be editable after creation and is expected to be a string that is sequences of [a-zA-Z] separated by any of [-_]. An example could be 'finance-customer'
           ui:field: ComponentIdentifierPicker
           ui:options:
             allowArbitraryValues: false
@@ -98,10 +98,56 @@ spec:
     - title: DBT Project
       properties:
         dbtName:
-          title: Project name
+          title: Project Name
           type: string
           description: Add a custom name to your dbt project
           default: dmb_dbt_transform
+        cloudStorage:
+          title: Cloud Storage
+          type: object
+          default: SELECT
+          properties:
+            storageProvider:
+              type: string
+              title: Cloud Storage
+              enum:
+                - SELECT
+                - AWS
+                - GCP
+          dependencies:
+            storageProvider:
+              oneOf:
+                - properties:
+                    storageProvider:
+                      enum:
+                        - SELECT
+                - properties:
+                    storageProvider:
+                      enum:
+                        - AWS
+                    bucketURI:
+                      title: Path to the Object Storage
+                      type: string
+                      description: Provide the Path to the Object Storage in the corresponding cloud infrastructure in the form of URI. Replace the <bucket-name> placeholder with your preferred bucket name which can be used to store artifacts.
+                      default: s3://<bucket-name>/
+                    region:
+                      title: Region
+                      type: string
+                      description: Region where the Object Storage is available.
+                      default: EU_WEST_1
+                    secretString:
+                      title: Connection String
+                      type: string
+                      description: Name of the Connection String inside the Secret Manager where the connection details are available. Example - airflow/connections/snowflake.
+                      default: airflow/connections/snowflake
+                - properties:
+                    storageProvider:
+                      enum:
+                        - GCP
+                    bucketURI:
+                      title: Bucket URI
+                      type: string
+                      description: Path to the Object Storage.
 
   steps:
     - id: template
@@ -123,10 +169,11 @@ spec:
           dependsOn: '${{ parameters.dependsOn }}'
           readsFrom: '${{ parameters.readsFrom }}'
           dbtProjectName: '${{ parameters.dbtName }}'
+          cloudStorage: '${{ parameters.cloudStorage }}'
           useCaseTemplateId: urn:dmb:utm:aws-workload-dbt-transformation-template:0.0.0
           infrastructureTemplateId: urn:dmb:itm:aws-workload-dbt-transformation-provisioner:0
           useCaseTemplateVersion: 0.0.0
-          repoUrl: 'gitlab.com?owner=AgileDMBSandbox%2F${{orgname}}%2Fmesh.repository%2F${{ parameters.domain | replace(r/domain:| |-/, "") }}%2F${{ parameters.dataproduct.split(".")[1] | replace(r/ |-/g, "") }}&repo=${{ parameters.name.split(" ") | join("") | lower }}'
+          repoUrl: 'gitlab.com?owner=AgileFactory%2FWitboost.Mesh%2Fiac%2Fqa%2Fmesh.repository%2F${{ parameters.domain | replace(r/domain:| |-/, "") }}%2F${{ parameters.dataproduct.split(".")[1] | replace(r/ |-/g, "") }}&repo=${{ parameters.name.split(" ") | join("") | lower }}'
           rootDirectory: '.'
           displayName: '${{ parameters.displayName }}'
 
@@ -137,7 +184,7 @@ spec:
       input:
         allowedHosts: ['gitlab.com']
         description: 'This is ${{ parameters.name }}'
-        repoUrl: 'gitlab.com?owner=AgileDMBSandbox%2F${{orgname}}%2Fmesh.repository%2F${{ parameters.domain | replace(r/domain:| |-/, "") }}%2F${{ parameters.dataproduct.split(".")[1] | replace(r/ |-/g, "") }}&repo=${{ parameters.name.split(" ") | join("") | lower }}'
+        repoUrl: 'gitlab.com?owner=AgileFactory%2FWitboost.Mesh%2Fiac%2Fqa%2Fmesh.repository%2F${{ parameters.domain | replace(r/domain:| |-/, "") }}%2F${{ parameters.dataproduct.split(".")[1] | replace(r/ |-/g, "") }}&repo=${{ parameters.name.split(" ") | join("") | lower }}'
         rootDirectory: '.'
         dataproduct: '${{ parameters.dataproduct }}'
 
