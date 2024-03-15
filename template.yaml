@@ -1,8 +1,8 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: aws-workload-dbt-transformation-767-template.1
-  title: DBT Transformation Updated Workload
+  name: aws-workload-dbt-transformation-template.1
+  title: DBT Transformation Workload
   description: Defines the a DBT project skeleton to perform data transformation
   mesh:
     icon: https://seeklogo.com/images/D/dbt-logo-500AB0BAA7-seeklogo.com.png
@@ -173,7 +173,7 @@ spec:
           useCaseTemplateId: urn:dmb:utm:aws-workload-dbt-transformation-template:0.0.0
           infrastructureTemplateId: urn:dmb:itm:aws-workload-dbt-transformation-provisioner:0
           useCaseTemplateVersion: 0.0.0
-          repoUrl: 'gitlab.com?owner=AgileFactory%2FWitboost.Mesh%2Fiac%2Fqa%2Fmesh.repository%2F${{ parameters.domain | replace(r/domain:| |-/, "") }}%2F${{ parameters.dataproduct.split(".")[1] | replace(r/ |-/g, "") }}&repo=${{ parameters.name.split(" ") | join("") | lower }}'
+          repoUrl: 'gitlab.com?owner=AgileDMBSandbox%2F${{orgname}}%2Fmesh.repository%2F${{ parameters.domain | replace(r/domain:| |-/, "") }}%2F${{ parameters.dataproduct.split(".")[1] | replace(r/ |-/g, "") }}&repo=${{ parameters.name.split(" ") | join("") | lower }}'
           rootDirectory: '.'
           displayName: '${{ parameters.displayName }}'
 
@@ -184,7 +184,7 @@ spec:
       input:
         allowedHosts: ['gitlab.com']
         description: 'This is ${{ parameters.name }}'
-        repoUrl: 'gitlab.com?owner=AgileFactory%2FWitboost.Mesh%2Fiac%2Fqa%2Fmesh.repository%2F${{ parameters.domain | replace(r/domain:| |-/, "") }}%2F${{ parameters.dataproduct.split(".")[1] | replace(r/ |-/g, "") }}&repo=${{ parameters.name.split(" ") | join("") | lower }}'
+        repoUrl: 'gitlab.com?owner=AgileDMBSandbox%2F${{orgname}}%2Fmesh.repository%2F${{ parameters.domain | replace(r/domain:| |-/, "") }}%2F${{ parameters.dataproduct.split(".")[1] | replace(r/ |-/g, "") }}&repo=${{ parameters.name.split(" ") | join("") | lower }}'
         rootDirectory: '.'
         dataproduct: '${{ parameters.dataproduct }}'
 
