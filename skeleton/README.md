@@ -1,4 +1,4 @@
-# ${{ values.name | dump }}
+# ${{ values.name }}
 
 - [Overview](#overview)
 - [Usage](#usage)
