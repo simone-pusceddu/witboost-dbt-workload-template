@@ -43,8 +43,7 @@ spec:
         domain:
           title: Domain
           type: string
-          description: Required. Domain of the Data Product this storage component belongs
-            to
+          description: Required. Domain of the Data Product this storage component belongs to
           ui:field: EntityPicker
           ui:options:
             allowArbitraryValues: false

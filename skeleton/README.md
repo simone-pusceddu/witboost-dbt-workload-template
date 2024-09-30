@@ -7,7 +7,7 @@
 
 Use this component to automatically create a Workload based on a dbt project that can be referenced from other components inside the platform.
 
-This component does not provision any resources or infrastructure, and as such can be used without any Specific Provisioner.
+This component does not provision any resources or infrastructure, and as such can be used without any Tech Adapter.
 
 ### What's a Workload?
 

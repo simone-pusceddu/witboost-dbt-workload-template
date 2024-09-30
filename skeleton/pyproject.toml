@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "dbt_workload"
 requires-python = ">=3.7"
 license = {text = "MIT"}
-description = "This package is used as an input to the Specific Provisioner"
+description = "This package is used as an input to the Tech Adapter"
 authors = [
     {name = "Agile Lab", email = "sahith.yerram@agilelab.it"},
 ]

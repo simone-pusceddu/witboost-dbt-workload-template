@@ -1,6 +1,6 @@
 <p align="center">
     <a href="https://www.witboost.com/">
-        <img src="docs/img/WITBOOST_LOGO.svg" alt="witboost" width=600 >
+        <img src="docs/img/witboost_logo.svg" alt="witboost" width=600 >
     </a>
 </p>
 
@@ -17,7 +17,9 @@ This repository is part of our [Starter Kit](https://github.com/agile-lab-dev/wi
 
 Use this template to automatically create a Workload based on a dbt project that can be referenced from other components inside the platform.
 
-This component does not provision any resources or infrastructure, and as such can be used without any Specific Provisioner.
+![Development](docs/img/development.png)
+
+This component does not provision any resources or infrastructure, and as such can be used without any Tech Adapter.
 
 ### What's a Template?
 
