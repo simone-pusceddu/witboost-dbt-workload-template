@@ -86,10 +86,9 @@ spec:
           default: []
           items:
             type: string
-            ui:field: EntityComponentsPicker
+            ui:field: EntityRelationsPicker
             ui:fieldName: dataproduct
-            ui:options:
-              allowArbitraryValues: false
+            relation: hasPart
           description: A component could depend on other components in the same Data
             Product. This information will be used to deploy the components in
             such an order that their dependencies already exist.
@@ -112,6 +111,7 @@ spec:
     - title: DBT Project Details
       required:
         - underlyingStorage
+        - storageAreaDetails
       properties:
         dbtName:
           title: Project Name
@@ -122,14 +122,20 @@ spec:
           title: Storage Area
           type: string
           description: Underlying Storage this output port will read from.
-          ui:field: EntityComponentsPicker
-          ui:componentsFilter: storage
+          ui:field: EntityRelationsPicker
           ui:fieldName: dataproduct
-        underlyingValues:
+          relation: hasPart
+          ui:filters:
+            - key: spec.type
+              value: "storage"
+        storageAreaDetails:
+          title: Storage Area details
+          description: Values retrieved from the Storage Area chosen above. 
+            If you don't see any values filled in, make sure you chose a valid Storage Area
           type: object
-          description: test
-          ui:options:
-            displayTitle: false
+          required:
+            - database
+            - schema
           properties:
             database:
               title: Database
@@ -150,14 +156,14 @@ spec:
         cloudStorage:
           title: Cloud Storage Details
           type: object
-          default: AWS
+          ui:widget: hidden # We're not showing this as the current template version is used only on environments without a Tech Adapter
           properties:
             storageProvider:
               type: string
               title: Cloud Storage
+              # default: AWS
               enum:
                 - AWS
-                - GCP
           dependencies:
             storageProvider:
               oneOf:
@@ -178,25 +184,17 @@ spec:
                       type: string
                       description: Region where the Object Storage is available.
                       default: EU_WEST_1
-                - properties:
-                    storageProvider:
-                      enum:
-                        - GCP
-                    bucketURI:
-                      title: Bucket URI
-                      type: string
-                      description: Path to the Object Storage.
         secrets:
           title: Secret Connection Details
           type: object
-          default: AWS
+          ui:widget: hidden # We're not showing this as the current template version is used only on environments without a Tech Adapter
           properties:
             secretsProvider:
               type: string
               title: Cloud Storage
+              # default: AWS
               enum:
                 - AWS
-                - GCP
           dependencies:
             secretsProvider:
               oneOf:
@@ -209,7 +207,7 @@ spec:
                       type: string
                       description: Secret ID which is used to retrieve the connection details from the
                         Secret Manager.
-                      default: airflow/connections/snowflake_test
+                      default: airflow/connections/snowflake
                     region:
                       title: Region
                       type: string
@@ -236,8 +234,8 @@ spec:
           readsFrom: ${{ parameters.readsFrom }}
           tags: ${{ parameters.tags }}
           dbtProjectName: ${{ parameters.dbtName }}
-          database: ${{ parameters.underlyingValues.database }}
-          schema: ${{ parameters.underlyingValues.schema }}
+          database: ${{ parameters.storageAreaDetails.database }}
+          schema: ${{ parameters.storageAreaDetails.schema }}
           cloudStorage: ${{ parameters.cloudStorage }}
           secrets: ${{ parameters.secrets }}
           useCaseTemplateId: urn:dmb:utm:aws-workload-dbt-transformation-template:0.0.0

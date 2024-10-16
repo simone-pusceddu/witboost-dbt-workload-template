@@ -13,15 +13,15 @@ specific: {
 	gitUrl!:         string
 	database!:       string
 	schema!:         string
-	secrets: {
-		secretsProvider?: null | string & =~"(?-i)^(AWS|GCP|Azure)$"
-		secretId?:        null | string
-		region?:          null | string & =~"^[A-Z0-9_]+$"
+	secrets?: null | {
+		secretsProvider!: null | string & =~"AWS"
+		secretId!:        null | string
+		region!:          null | string & =~"^[A-Z0-9_]+$"
 	}
-	cloudStorage: {
-		storageProvider?: null | string & =~"(?-i)^(AWS|GCP|Azure)$"
-		bucketURI?:       null | string
-		region?:          null | string & =~"^[A-Z0-9_]+$"
+	cloudStorage?: null | {
+		storageProvider!: null | string & =~"AWS"
+		bucketURI!:       null | string
+		region!:          null | string & =~"^[A-Z0-9_]+$"
 	}
 }
 

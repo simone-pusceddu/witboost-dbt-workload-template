@@ -7,8 +7,7 @@ apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: ${{ values.identifier }}
-  description: |
-      "${{ values.description }}"
+  description: ${{ values.description }}
   annotations:
     gitlab.com/project-slug: 'AgileDMBSandbox/${{orgname}}/mesh.repository/${{ domainNameNormalized }}/${{ dataProductNameNormalized }}/${{ componentNameNormalized }}'
     backstage.io/techdocs-ref: dir:.
@@ -25,14 +24,14 @@ spec:
   mesh:
     name: ${{ values.name }}
     fullyQualifiedName: ${{ values.fullyQualifiedName }}
-    description: |
-      "${{ values.description }}"
+    description: ${{ values.description }}
     kind: workload
     version: ${{ dataProductMajorVersion + ".0.0" }}
     infrastructureTemplateId: ${{ values.infrastructureTemplateId }}
     useCaseTemplateId: ${{ values.useCaseTemplateId }}
     dependsOn: {% if values.dependsOn | length > 0 %}{% for i in values.dependsOn %}
-      - ${{ i }}{% endfor %}{% else %}[]{% endif %}
+      - ${{ i }}
+    {%- endfor %}{% else %}[]{% endif %}
     platform: AWS
     technology: dbt
     workloadType: batch
@@ -41,15 +40,16 @@ spec:
       - tagFQN: ${{ i }}
         source: Tag
         labelType: Manual
-        state: Confirmed{% endfor %}{% else %}[]{% endif %}
+        state: Confirmed
+    {%- endfor %}{% else %}[]{% endif %}
     readsFrom: {% if values.readsFrom | length > 0 %}{% for i in values.readsFrom %}
-      - ${{ i }}{% endfor %}{% else %}[]{% endif %}
+      - ${{ i }}
+    {%- endfor %}{% else %}[]{% endif %}
     specific:
       dbtProjectName: ${{ values.dbtProjectName }}
       database: ${{ values.database }}
       schema: ${{ values.schema }}
-      gitUrl: |
-        https://gitlab.com/AgileDMBSandbox/${{orgname}}/mesh.repository/${{ domainNameNormalized }}/${{ dataProductNameNormalized }}/${{ componentNameNormalized }}.git
+      gitUrl: https://gitlab.com/AgileDMBSandbox/${{orgname}}/mesh.repository/${{ domainNameNormalized }}/${{ dataProductNameNormalized }}/${{ componentNameNormalized }}.git
       secrets:
         {% for key, value in values.secrets %}
           ${{ key }}: ${{ value }}

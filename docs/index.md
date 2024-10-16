@@ -32,20 +32,18 @@ This section includes the basic information that any Component of must have:
 ### DBT Project Details
 
 - **Project Name:** Give a name to the dbt project, by default the name "dmb_dbt_transform" will be chosen.
-- **Database:** Name of the database in the Warehouse. If not provided, the default value (in this case, domain name) will be assigned during the creation of Storage Area.
-- **Schema:** Name of the schema inside the Database specified above. If not provided, the default value (in this case, dpname_dpversion) will be assigned during the creation of the Storage Area.
-- **Cloud Storage Details:** Details about the Storage Area, Storage Area Provider and Region needed to be provided in this section.
-- **Secret Details:** Details about the Secret ID, Region and the Secret Manager Provider needed to be provided in this section.
+- **Storage Area:** Underlying Storage Area containing the database and schema information the dbt project will target to transform data. It must store its database and schema information under `spec.mesh.specific.database` and `spec.mesh.specific.schema` respectively.
+- ***Database:*** Name of the database in the Warehouse, retrieved from the chosen Storage Area.
+- ***Schema:*** Name of the schema inside the Database specified above, retrieved from the chosen Storage Area.
 
 *Example:*
 
-| Field name                | Example value                                                                         |
-|:--------------------------|:--------------------------------------------------------------------------------------|
-| **Project Name**          | vaccinations_dbt_transform                                                            |
-| **Database**              | HEALTHCARE                                                                            |
-| **Schema**                | VACCINATIONS                                                                          |
-| **Cloud Storage Details** | storageProvider: AWS<br/>region: EU_WEST_1<br/>bucketName: s3://<bucket-name>/        |
-| **Secrets**               | secretProvider: AWS<br/>region: EU_WEST_1<br/>secretId: airflow/connections/snowflake |
+| Field name       | Example value                       |
+|:-----------------|:------------------------------------|
+| **Project Name** | vaccinations_dbt_transform          |
+| **Storage Area** | Snowflake Vaccinations Storage Area |
+| ***Database***   | HEALTHCARE                          |
+| ***Schema***     | VACCINATIONS                        |
 
 After this the system will show you the summary of the template, and you can go back and edit or go ahead and create the Component. With the examples values given here it should look something like this:
 

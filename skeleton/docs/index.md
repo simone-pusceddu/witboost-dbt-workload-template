@@ -30,5 +30,3 @@
 | **Storage Area**          | ${{ values.underlyingStorage }}                                                                                                                                   |
 | **Database**              | ${{ values.database }}                                                                                                                                            |
 | **Schema**                | ${{ values.schema }}                                                                                                                                              |
-| **Cloud Storage Details** | {%- for key, value in values.cloudStorage  %} ${{ key }}: ${{ value }}<br/><br/> {%- endfor  %}                                                                   |
-| **Secret Details**        | {%- for key, value in values.secrets  %} ${{ key }}: ${{ value }}<br/><br/> {%- endfor  %}                                                                        |
