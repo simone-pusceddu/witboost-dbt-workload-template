@@ -31,10 +31,6 @@ spec:
           default: DBT Transformation Workload
           ui:options:
             allowArbitraryValues: true
-        fullyQualifiedName:
-          title: Fully Qualified Name
-          type: string
-          description: Human-Readable name that describes better the Workload.
         description:
           title: Description
           type: string
@@ -108,6 +104,22 @@ spec:
           description: Tags for the component.
           items:
             type: string
+        domainName:
+          type: string
+          ui:field: EntitySelectionPicker
+          ui:fieldName: domain
+          ui:property: spec.mesh.name
+          ui:options:
+            allowArbitraryValues: false
+          ui:widget: hidden
+        dataproductName:
+          type: string
+          ui:field: EntitySelectionPicker
+          ui:fieldName: dataproduct
+          ui:property: spec.mesh.name
+          ui:options:
+            allowArbitraryValues: false
+          ui:widget: hidden
     - title: DBT Project Details
       required:
         - underlyingStorage
@@ -224,7 +236,8 @@ spec:
           - .gitlab-ci.yml
         values:
           name: ${{ parameters.name }}
-          fullyQualifiedName: ${{ parameters.fullyQualifiedName }}
+          domainName: ${{ parameters.domainName }}
+          dataproductName: ${{ parameters.dataproductName }}
           description: ${{ parameters.description }}
           domain: ${{ parameters.domain }}
           dataproduct: ${{ parameters.dataproduct }}
