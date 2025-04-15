@@ -1,8 +1,8 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: aws-workload-dbt-transformation-template.1
-  title: DBT Transformation Workload
+  name: aws-workload-dbt-transformation-template-skeleton
+  title: DBT Transformation Workload (Skeleton)
   description: Defines the a DBT project skeleton to perform data transformation
   mesh:
     icon: https://seeklogo.com/images/D/dbt-logo-500AB0BAA7-seeklogo.com.png
