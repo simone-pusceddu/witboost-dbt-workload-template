@@ -254,10 +254,7 @@ spec:
           useCaseTemplateId: urn:dmb:utm:aws-workload-dbt-transformation-template:0.0.0
           infrastructureTemplateId: urn:dmb:itm:aws-workload-dbt-transformation-provisioner:0
           useCaseTemplateVersion: 0.0.0
-          repoUrl: gitlab.com?owner=AgileDMBSandbox%2F${{orgname}}%2Fmesh.repository%2F${{
-            parameters.domain | replace(r/domain:| |-/, "") }}%2F${{
-            parameters.dataproduct.split(".")[1] | replace(r/ |-/g, "")
-            }}&repo=${{ parameters.name.split(" ") | join("") | lower }}
+          repoUrl: gitlab.com?owner=simone.pusceddu&repo=${{ parameters.name.split(" ") | join("") | lower }}
           rootDirectory: .
     - id: publish
       name: Publish
@@ -266,10 +263,7 @@ spec:
         allowedHosts:
           - gitlab.com
         description: This is ${{ parameters.name }}
-        repoUrl: gitlab.com?owner=AgileDMBSandbox%2F${{orgname}}%2Fmesh.repository%2F${{
-          parameters.domain | replace(r/domain:| |-/, "") }}%2F${{
-          parameters.dataproduct.split(".")[1] | replace(r/ |-/g, "")
-          }}&repo=${{ parameters.name.split(" ") | join("") | lower }}
+        repoUrl: gitlab.com?owner=simone.pusceddu&repo=${{ parameters.name.split(" ") | join("") | lower }}
         rootDirectory: .
         dataproduct: ${{ parameters.dataproduct }}
     - id: register
